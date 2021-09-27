@@ -3,7 +3,7 @@ body,html{
     margin: 0px;
   }
   
-.box {
+.big {
        background-image: url(../img/artuck.png);
        background-repeat: no-repeat;
        background-size: cover;
