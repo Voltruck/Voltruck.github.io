@@ -3,8 +3,8 @@ body,html{
     margin: 0;
   }
   
-  .big{
-       background-image: url("artuck.png");
+.big {
+       background-image: url(../img/artuck.png);
        background-repeat: no-repeat;
        background-size: cover;
        background-position: center;
