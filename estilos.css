@@ -1,0 +1,11 @@
+body,html{
+    heigth: 100%
+    margin: 0;
+  }
+  
+  .big{
+       background-image: url("artruck.png);
+       background-repeat: no-repeat;
+       background-size: cover;
+       background-positionn: center;
+       background-attachment: fixed
