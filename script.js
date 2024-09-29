@@ -35,17 +35,17 @@ btn.on('click',function(){
           break;
         case 1:
           setTimeout(function(){
-          btn.text('You have 2 tries left');
+          btn.text('Não encontrado, tente de novo');
           },300);
           break;
         case 2:
           setTimeout(function(){
-          btn.text('Only 1 more');
+          btn.text('Tente de novo');
           },300);
           break;
         case 3:
           setTimeout(function(){
-          btn.text('Recover password?');
+          btn.text('Block');
           },300);
           input.prop('disabled',true);
           topbar.removeClass('error');
