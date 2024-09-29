@@ -103,23 +103,8 @@ body .article h1 {
 }
 
 .form {
-  margin: 0 auto;
-  position: fixed;
-  top: 35%;
-  left: 50%;
-  -moz-transform: translate3d(-50%, 0, 0);
-  -ms-transform: translate3d(-50%, 0, 0);
-  -webkit-transform: translate3d(-50%, 0, 0);
-  transform: translate3d(-50%, 0, 0);
-  width: 350px;
-  padding: 20px;
-  overflow: hidden;
-  background-color: black;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  background: inherit;
-  -moz-border-radius: 12px;
-  -webkit-border-radius: 12px;
-  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.8); /* Um fundo sólido com opacidade */
+}
 }
 .form .forceColor {
   width: 100%;
@@ -130,17 +115,7 @@ body .article h1 {
   background-color: rgba(0, 0, 0, 0.4);
 }
 .form:before {
-  content: "";
-  width: 110%;
-  height: 110%;
-  position: absolute;
-  background: inherit;
-  left: -5%;
-  right: 0;
-  bottom: 0;
-  top: -5%;
-  -webkit-filter: blur(3px);
-  filter: blur(3px);
+  filter: none; /* Remove o desfoque */
 }
 .form.goAway {
   opacity: 0;
