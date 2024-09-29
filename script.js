@@ -17,7 +17,7 @@ btn.on('click',function(){
   if(tries<=2){
     var pass = $('#password').val();
     console.log(pass);
-    if(pass==='this-is-soo-cool'){
+    if(pass==='interestelar'){
     setTimeout(function(){
       btn.text('Success!');
     },250);
