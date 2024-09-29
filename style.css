@@ -283,8 +283,7 @@ iframe {
  max-width: 900px;
  margin: auto;
  position: absolute;
- top: 0px;
- left: 248px;
+ top: 100px;
+ left: 480px;
  right: 480px;
-overflow: auto;
 }
