@@ -277,14 +277,14 @@ body .article h1 {
   color: white;
 }
 iframe {
- width: 50vw;
- height: 56.25vw;
- max-height:100vh;
- max-width: 177.78vh;
+ width: 853px;
+ height: 480px;
+ max-height: 500px;
+ max-width: 900px;
  margin: auto;
  position: absolute;
- top: 120px ;
- left: 0;
- right: 0;
+ top: 0px;
+ left: 248px;
+ right: 480px;
 overflow: auto;
 }
