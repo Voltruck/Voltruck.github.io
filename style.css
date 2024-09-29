@@ -277,7 +277,7 @@ body .article h1 {
   color: white;
 }
 iframe {
- width: 100vw;
+ width: 50vw;
  height: 56.25vw;
  max-height:100vh;
  max-width: 177.78vh;
