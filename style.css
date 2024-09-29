@@ -276,3 +276,14 @@ body .article h1 {
 .topbar.success .input::-webkit-input-placeholder {
   color: white;
 }
+iframe {
+ width: 100vw;
+ height: 56.25vw;
+ max-height:100vh;
+ max-width: 177.78vh;
+ margin: auto;
+ position: absolute;
+ top: 120px ;
+ left: 0;
+ right: 0;
+}
