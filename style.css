@@ -4,7 +4,7 @@ body {
   height: 100%;
   position: absolute;
   font-family: Raleway;
-  background: url(https://i0.wp.com/img.goodfon.com/original/1920x1080/b/a1/art-glaza-neko-ushki-koshka-kotionok.jpg?ssl=1) no-repeat fixed;
+  background: url(https://wallpapercave.com/wp/wp6469979.png) no-repeat fixed;
   background-size: cover;
   background-position: 50%;
   -webkit-font-smoothing: antialiased;
@@ -16,7 +16,7 @@ body .menu {
   background: inherit;
 }
 body .menu .mainmenu {
-  background: url(https://i0.wp.com/img.goodfon.com/original/1920x1080/b/a1/art-glaza-neko-ushki-koshka-kotionok.jpg?ssl=1) no-repeat fixed;
+  background: url(https://wallpapercave.com/wp/wp6469979.png) no-repeat fixed;
   background-size: cover;
   background-position: 50%;
 }
@@ -277,16 +277,14 @@ body .article h1 {
   color: white;
 }
 iframe {
- width: 853px;
- height: 480px;
- max-height: 500px;
- max-width: 900px;
- margin: auto;
- position: absolute;
- top: 100px;
- left: 100px;
- right: 100px;
-  z-index: 10;
+  width: 853px;
+  height: 480px;
+  max-height: 500px;
+  max-width: 900px;
+  margin: 20px auto; /* Centraliza o iframe horizontalmente e adiciona espaçamento */
+  display: block;
+  position: relative; /* Posicionamento relativo em vez de absoluto */
+  top: 100px;
 }
 footer {
   background-color: #333;
