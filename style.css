@@ -286,6 +286,9 @@ iframe {
   position: relative; /* Posicionamento relativo em vez de absoluto */
   top: 100px;
 }
+div {
+  margin-top: 50px; /* Adiciona 50px de espaço acima do elemento */
+}
 footer {
   background-color: #333;
   color: white;
