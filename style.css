@@ -281,7 +281,7 @@ iframe {
   height: 480px;
   max-height: 500px;
   max-width: 900px;
-  margin: 0px auto; /* Centraliza o iframe horizontalmente e adiciona espaçamento */
+  margin: 5px auto; /* Centraliza o iframe horizontalmente e adiciona espaçamento */
   display: block;
   position: relative; /* Posicionamento relativo em vez de absoluto */
   top: 100px;
