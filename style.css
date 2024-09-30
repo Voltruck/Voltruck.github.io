@@ -4,7 +4,7 @@ body {
   height: 100%;
   position: absolute;
   font-family: Raleway;
-  background: url(https://images.pexels.com/photos/3612932/pexels-photo-3612932.jpeg) no-repeat fixed;
+  background: url(https://i0.wp.com/img.goodfon.com/original/1920x1080/b/a1/art-glaza-neko-ushki-koshka-kotionok.jpg?ssl=1) no-repeat fixed;
   background-size: cover;
   background-position: 50%;
   -webkit-font-smoothing: antialiased;
@@ -16,7 +16,7 @@ body .menu {
   background: inherit;
 }
 body .menu .mainmenu {
-  background: url(https://images.pexels.com/photos/3612932/pexels-photo-3612932.jpeg) no-repeat fixed;
+  background: url(https://i0.wp.com/img.goodfon.com/original/1920x1080/b/a1/art-glaza-neko-ushki-koshka-kotionok.jpg?ssl=1) no-repeat fixed;
   background-size: cover;
   background-position: 50%;
 }
