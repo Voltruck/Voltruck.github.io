@@ -285,6 +285,7 @@ iframe {
   display: block;
   position: relative; /* Posicionamento relativo em vez de absoluto */
   top: 100px;
+  margin-bottom: 50px;
 footer {
   background-color: #333;
   color: white;
