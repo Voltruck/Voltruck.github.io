@@ -292,8 +292,9 @@ footer {
   color: white;
   padding: 20px 0;
   text-align: center;
-  position: relative;
- top: -1000px;
- left: 0px;
- right: 0px;
+  position: fixed; 
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
 }
