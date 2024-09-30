@@ -286,6 +286,7 @@ iframe {
  top: 100px;
  left: 100px;
  right: 100px;
+  z-index: 10;
 }
 footer {
   background-color: #333;
@@ -297,4 +298,5 @@ footer {
   left: 0;
   right: 0;
   width: 100%;
+  z-index: 1;
 }
