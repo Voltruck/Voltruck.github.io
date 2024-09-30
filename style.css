@@ -276,6 +276,7 @@ body .article h1 {
 .topbar.success .input::-webkit-input-placeholder {
   color: white;
 }
+
 iframe {
   width: 853px;
   height: 480px;
@@ -285,11 +286,12 @@ iframe {
   display: block;
   position: relative; /* Posicionamento relativo em vez de absoluto */
   top: 100px;
-  margin-bottom: 50px;
+  margin-bottom: 150px;
+
 footer {
   background-color: #333;
   color: white;
-  padding: 5px 0;
+  padding: 20px 0;
   text-align: center;
   position: fixed; 
   bottom: 0;
