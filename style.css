@@ -281,13 +281,13 @@ iframe {
   height: 480px;
   max-height: 500px;
   max-width: 900px;
-  margin: 5px auto; /* Centraliza o iframe horizontalmente e adiciona espaçamento */
+  margin: 20px auto; /* Centraliza o iframe horizontalmente e adiciona espaçamento */
   display: block;
   position: relative; /* Posicionamento relativo em vez de absoluto */
   top: 100px;
 }
 div {
-  margin-top: 50px; /* Adiciona 50px de espaço acima do elemento */
+  margin-top: 10px; /* Adiciona 50px de espaço acima do elemento */
 }
 footer {
   background-color: #333;
