@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Crypto Ticker WebSocket</title>
+  <title>Coinbase Crypto Ticker</title>
   <style>
     body {
       margin: 0;
@@ -59,15 +59,14 @@
 
 <script>
   const coins = [
-    { symbol: 'btcusdt', icon: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=026' },
-    { symbol: 'ethusdt', icon: 'https://cryptologos.cc/logos/ethereum-eth-logo.png?v=026' },
-    { symbol: 'bnbusdt', icon: 'https://cryptologos.cc/logos/bnb-bnb-logo.png?v=026' },
-    { symbol: 'solusdt', icon: 'https://cryptologos.cc/logos/solana-sol-logo.png?v=026' },
-    { symbol: 'xrpusdt', icon: 'https://cryptologos.cc/logos/xrp-xrp-logo.png?v=026' },
-    { symbol: 'adausdt', icon: 'https://cryptologos.cc/logos/cardano-ada-logo.png?v=026' },
+    { symbol: 'BTC-USD', icon: 'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/32/color/btc.png' },
+    { symbol: 'ETH-USD', icon: 'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/32/color/eth.png' },
+    { symbol: 'SOL-USD', icon: 'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/32/color/sol.png' },
+    { symbol: 'BNB-USD', icon: 'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/32/color/bnb.png' },
+    { symbol: 'XRP-USD', icon: 'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/32/color/xrp.png' },
+    { symbol: 'ADA-USD', icon: 'https://cdn.jsdelivr.net/gh/spothq/cryptocurrency-icons@master/32/color/ada.png' },
   ];
 
-  const tickerData = {};
   const track = document.getElementById('ticker-track');
 
   function createTickerContent() {
@@ -82,7 +81,7 @@
         icon.alt = coin.symbol;
 
         const text = document.createElement('span');
-        text.textContent = `${coin.symbol.toUpperCase()}: ...`;
+        text.textContent = `${coin.symbol}: ...`;
 
         wrapper.appendChild(icon);
         wrapper.appendChild(text);
@@ -90,44 +89,52 @@
       });
     }
 
-    const items1 = generateItems();
-    const items2 = generateItems(); // clone para rolagem contínua
-
-    items1.concat(items2).forEach(item => track.appendChild(item));
+    const items = generateItems().concat(generateItems());
+    items.forEach(item => track.appendChild(item));
   }
 
-  function updatePrice(symbol, price, changePercent) {
+  function updateTicker(data) {
+    const symbol = data.product_id;
+    const price = parseFloat(data.price);
+    const open = parseFloat(data.open_24h);
+    if (!symbol || isNaN(price) || isNaN(open)) return;
+
+    const changeAbs = price - open;
+    const changePct = (changeAbs / open) * 100;
+
     const el = document.querySelectorAll(`#ticker-${symbol} span`);
     el.forEach(span => {
-      const formatted = parseFloat(price).toLocaleString('en-US', {
-        style: 'currency',
-        currency: 'USD',
-      });
-      const percent = (changePercent * 100).toFixed(2);
-      const changeClass = percent >= 0 ? 'positive' : 'negative';
+      const priceFormatted = price.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+      const changeAbsFormatted = (changeAbs >= 0 ? '+' : '') + changeAbs.toFixed(2);
+      const changePctFormatted = (changePct >= 0 ? '+' : '') + changePct.toFixed(2) + '%';
+      const changeClass = changePct >= 0 ? 'positive' : 'negative';
 
-      span.innerHTML = `${symbol.toUpperCase()}: ${formatted} <span class="${changeClass}">(${percent}%)</span>`;
+      span.innerHTML = `
+        ${symbol}: ${priceFormatted}
+        <span class="${changeClass}">${changeAbsFormatted} (${changePctFormatted})</span>
+      `;
     });
   }
 
   function initWebSocket() {
-    const streamNames = coins.map(c => `${c.symbol}@miniTicker`).join('/');
-    const socket = new WebSocket(`wss://stream.binance.com:9443/stream?streams=${streamNames}`);
+    const socket = new WebSocket("wss://ws-feed.exchange.coinbase.com");
 
-    socket.onmessage = event => {
-      const msg = JSON.parse(event.data);
-      const data = msg.data;
-      if (!data || !data.s) return;
-
-      const symbol = data.s.toLowerCase();
-      const price = data.c;
-      const open = data.o;
-      const change = (price - open) / open;
-
-      updatePrice(symbol, price, change);
+    socket.onopen = () => {
+      socket.send(JSON.stringify({
+        type: "subscribe",
+        product_ids: coins.map(c => c.symbol),
+        channels: ["ticker"]
+      }));
     };
 
-    socket.onerror = e => console.error('WebSocket error:', e);
+    socket.onmessage = (event) => {
+      const data = JSON.parse(event.data);
+      if (data.type === "ticker") {
+        updateTicker(data);
+      }
+    };
+
+    socket.onerror = e => console.error("WebSocket error:", e);
   }
 
   createTickerContent();
