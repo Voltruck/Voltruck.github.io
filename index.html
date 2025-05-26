@@ -1,59 +1,30 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8">
-  <title>Widget do TradingView</title>
-</head>
-<body style="background-color:#000; color:#fff;">
-
-  <!-- TradingView Widget BEGIN -->
-  <div class="tradingview-widget-container">
-    <div class="tradingview-widget-container__widget"></div>
-    <div class="tradingview-widget-copyright">
-      <a href="https://br.tradingview.com/" rel="noopener nofollow" target="_blank">
-      </a>
-    </div>
-    <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container">
+  <div class="tradingview-widget-container__widget"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
+  {
+  "symbols": [
     {
-      "symbols": [
-        {
-          "description": "Bitcoin",
-          "proName": "COINBASE:BTCUSD"
-        },
-        {
-          "description": "Ethereum",
-          "proName": "CRYPTO:ETHUSD"
-        },
-        {
-          "description": "XRP",
-          "proName": "COINBASE:XRPUSD"
-        },
-        {
-          "description": "Doge",
-          "proName": "COINBASE:DOGEUSD"
-        },
-        {
-          "description": "Solana",
-          "proName": "COINBASE:SOLUSD"
-        },
-        {
-          "description": "Pi Network",
-          "proName": "OKX:PIUSD"
-        },
-        {
-          "description": "Animecoin",
-          "proName": "OKX:ANIMEUSD"
-        }
-      ],
-      "showSymbolLogo": true,
-      "isTransparent": true,
-      "displayMode": "adaptive",
-      "colorTheme": "dark",
-      "locale": "br"
+      "description": "Pi Network",
+      "proName": "OKX:PIUSD"
+    },
+    {
+      "description": "Solana",
+      "proName": "COINBASE:SOLUSD"
+    },
+    {
+      "description": "Real R$",
+      "proName": "NASDAQ:REAL"
     }
-    </script>
-  </div>
-  <!-- TradingView Widget END -->
-
-</body>
-</html>
+  ],
+  "showSymbolLogo": true,
+  "isTransparent": true,
+  "largeChartUrl": "https://voltruck.github.io/",
+  "displayMode": "regular",
+  "colorTheme": "dark",
+  "locale": "en"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
