@@ -1,70 +1,138 @@
-<nav id="ticker-tape">
-    <!-- TradingView Widget BEGIN -->
-    <div class="tradingview-widget-container">
-        <div class="tradingview-widget-container__widget"></div>
-        <script
-            type="text/javascript"
-            src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js"
-            async
->
-            {
-            "symbols": [
-              {
-                "description": "",
-                "proName": "NASDAQ:TSLA"
-              },
-              {
-                "description": "",
-                "proName": "NASDAQ:AAPL"
-              },
-              {
-                "description": "",
-                "proName": "NASDAQ:NVDA"
-              },
-              {
-                "description": "",
-                "proName": "NASDAQ:MSFT"
-              },
-              {
-                "description": "",
-                "proName": "NASDAQ:AMZN"
-              },
-              {
-                "description": "",
-                "proName": "NASDAQ:GOOGL"
-              },
-              {
-                "description": "",
-                "proName": "NASDAQ:META"
-              },
-              {
-                "description": "",
-                "proName": "NYSE:BRK.B"
-              },
-              {
-                "description": "",
-                "proName": "NYSE:LLY"
-              },
-              {
-                "description": "",
-                "proName": "NYSE:UNH"
-              },
-              {
-                "description": "",
-                "proName": "NYSE:V"
-              },
-              {
-                "description": "",
-                "proName": "NYSE:WMT"
-              }
-            ],
-            "showSymbolLogo": true,
-            "colorTheme": "light",
-            "isTransparent": false,
-            "displayMode": "adaptive",
-            "locale": "en"
-             }
-        </script>
-    </div>
-    <!-- TradingView Widget END -->
-</nav>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Crypto Ticker WebSocket</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .ticker {
+      background: #111;
+      color: #fff;
+      overflow: hidden;
+      white-space: nowrap;
+      box-sizing: border-box;
+      padding: 10px 0;
+    }
+
+    .ticker-track {
+      display: flex;
+      width: max-content;
+      animation: scroll 30s linear infinite;
+    }
+
+    .ticker-item {
+      display: flex;
+      align-items: center;
+      margin-right: 40px;
+      font-size: 16px;
+    }
+
+    .ticker-item img {
+      width: 20px;
+      height: 20px;
+      margin-right: 8px;
+    }
+
+    .positive {
+      color: #00ff88;
+    }
+
+    .negative {
+      color: #ff4d4d;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+  </style>
+</head>
+<body>
+
+<div class="ticker">
+  <div class="ticker-track" id="ticker-track"></div>
+</div>
+
+<script>
+  const coins = [
+    { symbol: 'btcusdt', icon: 'https://cryptologos.cc/logos/bitcoin-btc-logo.png?v=026' },
+    { symbol: 'ethusdt', icon: 'https://cryptologos.cc/logos/ethereum-eth-logo.png?v=026' },
+    { symbol: 'bnbusdt', icon: 'https://cryptologos.cc/logos/bnb-bnb-logo.png?v=026' },
+    { symbol: 'solusdt', icon: 'https://cryptologos.cc/logos/solana-sol-logo.png?v=026' },
+    { symbol: 'xrpusdt', icon: 'https://cryptologos.cc/logos/xrp-xrp-logo.png?v=026' },
+    { symbol: 'adausdt', icon: 'https://cryptologos.cc/logos/cardano-ada-logo.png?v=026' },
+  ];
+
+  const tickerData = {};
+  const track = document.getElementById('ticker-track');
+
+  function createTickerContent() {
+    function generateItems() {
+      return coins.map(coin => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'ticker-item';
+        wrapper.id = `ticker-${coin.symbol}`;
+
+        const icon = document.createElement('img');
+        icon.src = coin.icon;
+        icon.alt = coin.symbol;
+
+        const text = document.createElement('span');
+        text.textContent = `${coin.symbol.toUpperCase()}: ...`;
+
+        wrapper.appendChild(icon);
+        wrapper.appendChild(text);
+        return wrapper;
+      });
+    }
+
+    const items1 = generateItems();
+    const items2 = generateItems(); // clone para rolagem contínua
+
+    items1.concat(items2).forEach(item => track.appendChild(item));
+  }
+
+  function updatePrice(symbol, price, changePercent) {
+    const el = document.querySelectorAll(`#ticker-${symbol} span`);
+    el.forEach(span => {
+      const formatted = parseFloat(price).toLocaleString('en-US', {
+        style: 'currency',
+        currency: 'USD',
+      });
+      const percent = (changePercent * 100).toFixed(2);
+      const changeClass = percent >= 0 ? 'positive' : 'negative';
+
+      span.innerHTML = `${symbol.toUpperCase()}: ${formatted} <span class="${changeClass}">(${percent}%)</span>`;
+    });
+  }
+
+  function initWebSocket() {
+    const streamNames = coins.map(c => `${c.symbol}@miniTicker`).join('/');
+    const socket = new WebSocket(`wss://stream.binance.com:9443/stream?streams=${streamNames}`);
+
+    socket.onmessage = event => {
+      const msg = JSON.parse(event.data);
+      const data = msg.data;
+      if (!data || !data.s) return;
+
+      const symbol = data.s.toLowerCase();
+      const price = data.c;
+      const open = data.o;
+      const change = (price - open) / open;
+
+      updatePrice(symbol, price, change);
+    };
+
+    socket.onerror = e => console.error('WebSocket error:', e);
+  }
+
+  createTickerContent();
+  initWebSocket();
+</script>
+
+</body>
+</html>
